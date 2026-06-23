@@ -14,53 +14,52 @@
     }
 
     .clock-widget {
-      width: 250px;
+      width: 300px;
       max-width: 100%;
       box-sizing: border-box;
-      padding: 2px;
+      padding: 0;
     }
 
     .time-row {
       display: grid;
-      grid-template-columns: 1fr 20px 1fr;
+      grid-template-columns: 1fr 36px 1fr;
       align-items: center;
-      column-gap: 6px;
+      column-gap: 10px;
     }
 
     .time-box {
-      height: 68px;
-      border: 2px solid #0b2a35;
-      border-radius: 15px;
+      height: 86px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 46px;
+      font-size: 82px;
       font-weight: 800;
       line-height: 1;
       background: transparent;
+      border: none;
     }
 
     .colon {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 38px;
+      font-size: 70px;
       font-weight: 800;
       line-height: 1;
-      padding-bottom: 4px;
+      padding-bottom: 8px;
     }
 
     .date-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      column-gap: 10px;
-      margin-top: 10px;
+      column-gap: 34px;
+      margin-top: 16px;
       align-items: center;
     }
 
     .day-name,
     .full-date {
-      font-size: 17px;
+      font-size: 30px;
       font-weight: 400;
       line-height: 1;
       white-space: nowrap;
@@ -72,14 +71,14 @@
 <body>
   <div class="clock-widget">
     <div class="time-row">
-      <div class="time-box" id="hours">16</div>
+      <div class="time-box" id="hours">14</div>
       <div class="colon">:</div>
-      <div class="time-box" id="minutes">40</div>
+      <div class="time-box" id="minutes">57</div>
     </div>
 
     <div class="date-row">
       <div class="day-name" id="dayName">Tuesday</div>
-      <div class="full-date" id="fullDate">23 June 2026</div>
+      <div class="full-date" id="fullDate">23 June</div>
     </div>
   </div>
 
@@ -119,7 +118,7 @@
       document.getElementById("minutes").textContent = minutes;
       document.getElementById("dayName").textContent = days[now.getDay()];
       document.getElementById("fullDate").textContent =
-        now.getDate() + " " + months[now.getMonth()] + " " + now.getFullYear();
+        now.getDate() + " " + months[now.getMonth()];
     }
 
     updateClock();
