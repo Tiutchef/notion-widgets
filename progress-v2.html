@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #222;
+      overflow: hidden;
+    }
+
+    .progress-widget {
+      width: 700px;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      align-items: center;
+      column-gap: 28px;
+      margin-bottom: 26px;
+    }
+
+    .bar-frame {
+      width: 420px;
+      height: 50px;
+      border: 4px solid #222;
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 8px;
+      background: transparent;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: #222;
+      border-radius: 1px;
+    }
+
+    .label {
+      font-size: 32px;
+      font-weight: 500;
+      white-space: nowrap;
+      line-height: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-widget">
+    <div class="row">
+      <div class="bar-frame">
+        <div class="bar-fill" id="yearBar"></div>
+      </div>
+      <div class="label" id="yearLabel">Year 2026: 0%</div>
+    </div>
+
+    <div class="row">
+      <div class="bar-frame">
+        <div class="bar-fill" id="monthBar"></div>
+      </div>
+      <div class="label" id="monthLabel">Month June: 0%</div>
+    </div>
+
+    <div class="row">
+      <div class="bar-frame">
+        <div class="bar-fill" id="lifeBar"></div>
+      </div>
+      <div class="label" id="lifeLabel">Life: 36%</div>
+    </div>
+  </div>
+
+  <script>
+    function getYearProgress() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 1);
+      const end = new Date(now.getFullYear() + 1, 0, 1);
+      return Math.round(((now - start) / (end - start)) * 100);
+    }
+
+    function getMonthProgress() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), now.getMonth(), 1);
+      const end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      return Math.round(((now - start) / (end - start)) * 100);
+    }
+
+    function updateProgress() {
+      const now = new Date();
+
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+
+      const yearProgress = getYearProgress();
+      const monthProgress = getMonthProgress();
+
+      const currentYear = now.getFullYear();
+      const currentMonth = months[now.getMonth()];
+
+      const currentAge = 27;
+      const expectedAge = 75;
+      const lifeProgress = Math.round((currentAge / expectedAge) * 100);
+
+      document.getElementById("yearBar").style.width = yearProgress + "%";
+      document.getElementById("monthBar").style.width = monthProgress + "%";
+      document.getElementById("lifeBar").style.width = lifeProgress + "%";
+
+      document.getElementById("yearLabel").textContent =
+        "Year " + currentYear + ": " + yearProgress + "%";
+
+      document.getElementById("monthLabel").textContent =
+        "Month " + currentMonth + ": " + monthProgress + "%";
+
+      document.getElementById("lifeLabel").textContent =
+        "Life: " + lifeProgress + "%";
+    }
+
+    updateProgress();
+    setInterval(updateProgress, 60000);
+  </script>
+</body>
+</html>
