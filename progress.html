@@ -14,26 +14,26 @@
     }
 
     .progress-widget {
-      width: 360px;
-      padding: 8px;
+      width: 285px;
+      padding: 4px;
       box-sizing: border-box;
     }
 
     .row {
       display: grid;
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: 170px 1fr;
       align-items: center;
-      column-gap: 16px;
-      margin-bottom: 12px;
+      column-gap: 10px;
+      margin-bottom: 8px;
     }
 
     .bar-frame {
-      width: 240px;
-      height: 28px;
+      width: 170px;
+      height: 22px;
       border: 2px solid #222;
       border-radius: 4px;
       box-sizing: border-box;
-      padding: 4px;
+      padding: 3px;
       background: transparent;
     }
 
@@ -44,7 +44,7 @@
     }
 
     .label {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 500;
       white-space: nowrap;
     }
@@ -80,6 +80,7 @@
       const now = new Date();
       const start = new Date(now.getFullYear(), 0, 1);
       const end = new Date(now.getFullYear() + 1, 0, 1);
+
       return Math.round(((now - start) / (end - start)) * 100);
     }
 
@@ -87,12 +88,33 @@
       const now = new Date();
       const start = new Date(now.getFullYear(), now.getMonth(), 1);
       const end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
       return Math.round(((now - start) / (end - start)) * 100);
     }
 
     function updateProgress() {
+      const now = new Date();
+
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+
       const year = getYearProgress();
       const month = getMonthProgress();
+
+      const currentYear = now.getFullYear();
+      const currentMonth = months[now.getMonth()];
 
       const currentAge = 27;
       const expectedAge = 75;
@@ -102,8 +124,8 @@
       document.getElementById("monthBar").style.width = month + "%";
       document.getElementById("lifeBar").style.width = life + "%";
 
-      document.getElementById("yearLabel").textContent = "Year: " + year + "%";
-      document.getElementById("monthLabel").textContent = "Month: " + month + "%";
+      document.getElementById("yearLabel").textContent = "Year " + currentYear + ": " + year + "%";
+      document.getElementById("monthLabel").textContent = "Month " + currentMonth + ": " + month + "%";
       document.getElementById("lifeLabel").textContent = "Life: " + life + "%";
     }
 
